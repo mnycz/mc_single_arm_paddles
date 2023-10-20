@@ -672,7 +672,8 @@ c
      >          dxdz_s, dydz_s,
      >		x_fp, dx_fp, y_fp, dy_fp, m2, shms_spec,
      >		ms_flag, wcs_flag, decay_flag, resmult, xtar_init, ok_spec, 
-     >          pathlen, 5)
+     >          pathlen, 5,xs_scin_1x_x,xs_scin_1x_y,ys_scin_1y_x,ys_scin_1y_y,
+     >          xs_scin_2x_x,xs_scin_2x_y,ys_scin_2y_x,ys_scin_2y_y)
 
 	     if (spec_ntuple) then
 		shms_spec(59) = shmsSTOP_id
