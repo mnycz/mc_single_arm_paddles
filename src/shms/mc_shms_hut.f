@@ -9,13 +9,12 @@ C Monte-Carlo of HMS detector hut.
 C----------------------------------------------------------------------
 
 	implicit 	none
-
 	include 'struct_shms.inc'
 	include '../spectrometers.inc'
 	include 'hut.inc'
 
 C Math constants
-
+	integer hit_s1x,hit_s1y,hit_s2x,hit_s2y
 	real*8 pi,d_r,r_d,root
 
 	parameter (pi = 3.141592654)
@@ -29,6 +28,10 @@ C Math constants
         parameter (vac_flag = .true.) ! FALSE means helium bag replaces 1st Cerenkov (Ar/Ne) 
 
 c	common /hutflag/ cer_flag,vac_flag
+	common /paddles_x/pad_1x_lo_num,pad_1x_hi_num,pad_2x_lo_num
+     >  ,pad_2x_hi_num
+        common /paddles_y/pad_1y_lo_num,pad_1y_hi_num,pad_2y_lo_num
+     >  ,pad_2y_hi_num
 
 C all parameters, later to take from .parm files
 C The arguments
@@ -43,6 +46,10 @@ C The arguments
 	real*8 resmult				!DC resolution factor
 	real*8 zinit
         real*4 spec(58)
+	real*8 xs_pad1x_x,xs_pad1x_y
+        real*8 xs_pad2x_x,xs_pad2x_y
+        real*8 ys_pad1y_x,ys_pad1y_y
+	real*8 ys_pad2y_x,ys_pad2y_y
 
 c external function
 	real*8 gauss1
@@ -66,6 +73,15 @@ c mkj
 	logical use_det_cut
 	parameter (use_det_cut=.true.)
 !	parameter (use_det_cut=.false.)
+! cadd cut on the hodoscope paddle                                                                                                                                                                                                                                            \                                                                                                                                                                                                                                   
+        real*8 pscin_1x_center,pscin_1x_size,pscin_1x_spacing
+        real*8 pscin_2x_center,pscin_2x_size,pscin_2x_spacing
+        real*8 pscin_1y_center,pscin_1y_size,pscin_1y_spacing
+        real*8 pscin_2y_center,pscin_2y_size,pscin_2y_spacing
+        real*8 pscin_2y_size_hi
+        real*8 xs_lo,xs_hi,ys_lo,ys_hi
+        integer pad_1x_lo_num,pad_1x_hi_num,pad_2x_lo_num,pad_2x_hi_num
+        integer pad_1y_lo_num,pad_1y_hi_num,pad_2y_lo_num,pad_2y_hi_num
 
 C ================================ Executable Code =============================
 
