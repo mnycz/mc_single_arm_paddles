@@ -1,7 +1,9 @@
 	subroutine mc_shms(p_spec, th_spec, dpp, x, y, z, dxdz, dydz,
      >			x_fp,dx_fp,y_fp,dy_fp,m2, spec,
      >		ms_flag, wcs_flag, decay_flag, resmult, fry, ok_spec, 
-     >         pathlen, spectr)
+     >         pathlen, spectr,xs_pad1x_x,xs_pad1x_y,
+     >          ys_pad1y_x,ys_pad1y_y,xs_pad2x_x,xs_pad2x_y,
+     >          ys_pad2y_x,ys_pad2y_y)
 
 C+______________________________________________________________________________
 !
@@ -94,7 +96,11 @@ c collimator
 	real*8  y_off,x_off	!horiz. and vert. position offset of slit
 	real*8  z_off		!offset in distance from target to front of slit.
 	real*8	z_off_lsa,z_off_ssa
-
+ 
+	real*8 xs_pad1x_x,xs_pad1x_y
+	real*8 xs_pad2x_x,xs_pad2x_y
+        real*8 ys_pad1y_x,ys_pad1y_y
+	real*8 ys_pad2y_x,ys_pad2y_y
 	parameter (h_entr = 8.5)
 	parameter (v_entr = 12.5)
 	parameter (h_exit = 8.65)
@@ -972,7 +978,9 @@ C If we get this far, the particle is in the hut.
 C and track through the detector hut
 	  call mc_shms_hut(m2,p,x_fp,dx_fp,y_fp,dy_fp,ms_flag,wcs_flag,
      >		decay_flag,dflag,resmult,spec,
-     >          ok_hut,0.0,pathlen,spectr)
+     >          ok_hut,0.0,pathlen,spectr,xs_pad1x_x,xs_pad1x_y,
+     >          ys_pad1y_x,ys_pad1y_y,xs_pad2x_x,xs_pad2x_y,
+     >          ys_pad2y_x,ys_pad2y_y)
 	   if (.not. ok_hut) then
 	      shmsSTOP_id=33
 	      goto 500
