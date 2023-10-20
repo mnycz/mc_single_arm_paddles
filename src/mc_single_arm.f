@@ -76,6 +76,17 @@ C Initial and reconstructed track quantities.
 	real*8 fry,fr1,fr2
 	real*8 p_spec,th_spec			!spectrometer setting
 	real*8 resmult
+C  Scint.                                                                                                                                                                                                                                                                      
+	integer pad_1x_lo_num,pad_1x_hi_num,pad_2x_lo_num,pad_2x_hi_num ! Read in range for paddles                                                                                                                                                                           
+        integer pad_1y_lo_num,pad_1y_hi_num,pad_2y_lo_num,pad_2y_hi_num ! Read in range for paddles                                                                                                                                                                           
+        real*8 xs_pad1x_x,xs_pad1x_y,ys_pad1y_x,ys_pad1y_y
+        real*8 xs_pad2x_x,xs_pad2x_y,ys_pad2y_x,ys_pad2y_y
+        real*8 xs_scin_1x_x,xs_scin_1x_y,ys_scin_1y_x,ys_scin_1y_y
+        real*8 xs_scin_2x_x,xs_scin_2x_y,ys_scin_2y_x,ys_scin_2y_y
+        common /paddles_x/pad_1x_lo_num,pad_1x_hi_num,pad_2x_lo_num
+     >  ,pad_2x_hi_num
+        common /paddles_y/pad_1y_lo_num,pad_1y_hi_num,pad_2y_lo_num
+     >  ,pad_2y_hi_num
 
 C Control flags (from input file)
 	integer*4 ispec
