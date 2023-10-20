@@ -294,14 +294,30 @@ C at last cathode foil of second drift chamber set, drift to the 1st hodoscope
 	radw = drift/hair_radlen
 	call project(xs,ys,drift,decay_flag,dflag,m2,p,pathlen)
 	if(ms_flag) call musc_ext(m2,p,radw,drift,dydzs,dxdzs,ys,xs)
-	if (ys.gt.(hscin_1x_left+hscin_1y_offset) .or.
-     >      ys.lt.(hscin_1x_right+hscin_1y_offset)) then
-	  shmsSTOP_s1 = shmsSTOP_s1 + 1
-	  if (use_det_cut) then
-	     shmsSTOP_id=36
-	     goto 500
-	  endif
-	endif
+
+	xs_pad1x_x=xs !store the x position at pad1x                                                                                                                                                                                                                           
+        xs_pad1x_y=ys
+        xs_lo =  pscin_1x_center+pscin_1x_spacing*(pad_1x_lo_num-1)
+     >      -pscin_1x_size/2.
+        xs_hi =  pscin_1x_center+pscin_1x_spacing*(pad_1x_hi_num-1)
+     >      +pscin_1x_size/2.
+        hit_s1x = 0
+
+	  if ( ys.le.(hscin_1x_left+hscin_1y_offset) .and.
+     >      ys.ge.(hscin_1x_right+hscin_1y_offset)  .and.
+     >      xs.le. xs_hi .and. xs.ge. xs_lo) then
+            hit_s1x = 1
+                 endif
+ 
+c	if (ys.gt.(hscin_1x_left+hscin_1y_offset) .or.
+c     >      ys.lt.(hscin_1x_right+hscin_1y_offset)) then
+c	  shmsSTOP_s1 = shmsSTOP_s1 + 1
+c	  if (use_det_cut) then
+c	     shmsSTOP_id=36
+c	     goto 500
+c	  endif
+c	endif
+
         spec(44)=ys
 	radw = hscin_1x_thick/hscin_radlen
 	if(ms_flag) call musc(m2,p,radw,dydzs,dxdzs)
@@ -309,14 +325,33 @@ C at last cathode foil of second drift chamber set, drift to the 1st hodoscope
 	radw = drift/hair_radlen
 	call project(xs,ys,drift,decay_flag,dflag,m2,p,pathlen)
 	if(ms_flag) call musc_ext(m2,p,radw,drift,dydzs,dxdzs,ys,xs)
-	if (xs.gt.(hscin_1y_bot+hscin_1x_offset) .or.
-     >      xs.lt.(hscin_1y_top+hscin_1x_offset)) then
-	  shmsSTOP_s1 = shmsSTOP_s1 + 1
-	  if (use_det_cut) then
-	     shmsSTOP_id=37
-	     goto 500
-	  endif
-	endif
+
+ 	pscin_1y_spacing = 7.5
+        pscin_1y_center= +45.0 !-45.0                                                                                                                                                                                                                                          
+        pscin_1y_size = 8.0 !8.0                                                                                                                                                                                                                                               
+        ys_pad1y_y=ys !store y pos at 1y                                                                                                                                                                                                                                       
+        ys_pad1y_x=xs
+        ys_hi =  pscin_1y_center-pscin_1y_spacing*(pad_1y_lo_num-1)                                                                                                                                               
+     >      +pscin_1y_size/2.
+        ys_lo =  pscin_1y_center-pscin_1y_spacing*(pad_1y_hi_num-1)                                                                                                                                                
+     >      -pscin_1y_size/2.
+        hit_s1y = 0
+
+        if (xs.le.(hscin_1y_bot+hscin_1x_offset) .and. ! was .or.!was xs.le                                                                                                                                                                                                    
+     >      xs.ge.(hscin_1y_top+hscin_1x_offset) .and.
+ 	    ys .le. (ys_hi+0) .and. ys .ge. (ys_lo-0)) then
+           	hit_s1y=1
+		endif
+
+     
+c if (xs.gt.(hscin_1y_bot+hscin_1x_offset) .or.
+c     >      xs.lt.(hscin_1y_top+hscin_1x_offset)) then
+c	  shmsSTOP_s1 = shmsSTOP_s1 + 1
+c	  if (use_det_cut) then
+c	     shmsSTOP_id=37
+c	     goto 500
+c	  endif
+c	endif
         spec(43)=xs
  	radw = hscin_1y_thick/hscin_radlen
 	if(ms_flag) call musc(m2,p,radw,dydzs,dxdzs)
@@ -355,14 +390,32 @@ C drift to 2nd hodoscope
 	radw = drift/hair_radlen
 	call project(xs,ys,drift,decay_flag,dflag,m2,p,pathlen)
 	if(ms_flag) call musc_ext(m2,p,radw,drift,dydzs,dxdzs,ys,xs)
-	if (ys.gt.(hscin_2x_left+hscin_2y_offset) .or.
-     >      ys.lt.(hscin_2x_right+hscin_2y_offset)) then
-	  shmsSTOP_s3 = shmsSTOP_s3 + 1
-	  if (use_det_cut) then
-	     shmsSTOP_id = 38
-	     goto 500
-	  endif
-	endif
+
+  	xs_pad2x_x=xs
+        xs_pad2x_y=ys
+        pscin_2x_center= -61.75
+        pscin_2x_size = 10.0
+        pscin_2x_spacing = 9.5
+        xs_lo =  pscin_2x_center+pscin_2x_spacing*(pad_2x_lo_num-1)
+     >      -pscin_2x_size/2.
+        xs_hi =  pscin_2x_center+pscin_2x_spacing*(pad_2x_hi_num-1)
+     >      +pscin_2x_size/2.
+        hit_s2x=0
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                                                                                                                                                                                                                                       
+        if (ys.le.(hscin_2x_left+hscin_2y_offset) .and.                                                                                                                                                                                                    
+     >      ys.ge.(hscin_2x_right+hscin_2y_offset) .and.
+     >      xs.le.xs_hi .and. xs.ge .xs_lo) then                                                                                                                                                                                                                    
+           hit_s2x=1
+           endif
+
+c	if (ys.gt.(hscin_2x_left+hscin_2y_offset) .or.
+c     >      ys.lt.(hscin_2x_right+hscin_2y_offset)) then
+c	  shmsSTOP_s3 = shmsSTOP_s3 + 1
+c	  if (use_det_cut) then
+c	     shmsSTOP_id = 38
+c	     goto 500
+c	  endif
+c	endif
         spec(46)=ys
 	radw = hscin_2x_thick/hscin_radlen
 	if(ms_flag) call musc(m2,p,radw,dydzs,dxdzs)
@@ -370,14 +423,38 @@ C drift to 2nd hodoscope
 	radw = drift/hair_radlen
 	call project(xs,ys,drift,decay_flag,dflag,m2,p,pathlen)
 	if(ms_flag) call musc_ext(m2,p,radw,drift,dydzs,dxdzs,ys,xs)
-	if (xs.gt.(hscin_2y_bot+hscin_2x_offset) .or.
-     >      xs.lt.(hscin_2y_top+hscin_2x_offset)) then
-	  shmsSTOP_s2 = shmsSTOP_s2 + 1
-	  if (use_det_cut) then
-	     shmsSTOP_id=39
-	     goto 500
-	  endif
-	endif
+
+	ys_pad2y_y=ys
+        ys_pad2y_x=xs
+        pscin_2y_spacing = 5.0 !PARAM files                                                                                                                                                                                                                                    
+        pscin_2y_center= 50.0 !-50.0                                                                                                                                                                                                                                                                                                                                                                                
+        ys_hi =  pscin_2y_center-pscin_2y_spacing*(pad_2y_lo_num-1)!ys_lo=pscin_2y_center+pscin_2y_spacing*(pad_2y_lo_num-1)                                                                                                                                                   
+     >      +pscin_2y_size/2.
+        ys_lo =  pscin_2y_center-pscin_2y_spacing*(pad_2y_hi_num-1)!ys_hi=pscin_2y_center+pscin_2y_spacing*(pad_2y_hi_num-1)                                                                                                                                                   
+     >      -pscin_2y_size_hi/2.
+
+        hit_s2y=0
+        if (xs.le.(hscin_2y_bot+hscin_2x_offset) .and. ! was .or.                                                                                                                                                                                                              
+     >      xs.ge.(hscin_2y_top+hscin_2x_offset) .and. ! was then                                                                                                                                                                                                              
+     >      ys .le. (ys_hi) .and. ys .ge. (ys_lo)) then    ! added Mike 5/10                                                                                                                                                                                                   
+               hit_s2y=1
+               endif
+
+         if (use_det_cut
+     >   .and.((hit_s1x+hit_s1y+hit_s2x+hit_s2y).lt.3)) then                                                                                                                                                                                                                
+                shmsSTOP_id=39
+                goto 500
+             endif
+
+ 
+c	if (xs.gt.(hscin_2y_bot+hscin_2x_offset) .or.
+c     >      xs.lt.(hscin_2y_top+hscin_2x_offset)) then
+c	  shmsSTOP_s2 = shmsSTOP_s2 + 1
+c	  if (use_det_cut) then
+c	     shmsSTOP_id=39
+c	     goto 500
+c	  endif
+c	endif
         spec(45)=xs
 	radw = hscin_2y_thick/hscin_radlen
 	if(ms_flag) call musc(m2,p,radw,dydzs,dxdzs)
