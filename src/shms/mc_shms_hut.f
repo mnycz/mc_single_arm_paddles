@@ -344,21 +344,21 @@ c	endif
 	if(ms_flag) call musc_ext(m2,p,radw,drift,dydzs,dxdzs,ys,xs)
 
  	pscin_1y_spacing = 7.5
-        pscin_1y_center= +45.0 !-45.0                                                                                                                                                                                                                                          
-        pscin_1y_size = 8.0 !8.0                                                                                                                                                                                                                                               
-        ys_pad1y_y=ys !store y pos at 1y                                                                                                                                                                                                                                       
+        pscin_1y_center= +45.0
+        pscin_1y_size = 8.0 !8.0                                                                                                                                                                                                                                              
+        ys_pad1y_y=ys !store y pos at 1y                                                                                                                                                                                                                                      
         ys_pad1y_x=xs
-        ys_hi =  pscin_1y_center-pscin_1y_spacing*(pad_1y_lo_num-1)                                                                                                                                               
+        ys_hi =  pscin_1y_center-pscin_1y_spacing*(pad_1y_lo_num-1)	
      >      +pscin_1y_size/2.
-        ys_lo =  pscin_1y_center-pscin_1y_spacing*(pad_1y_hi_num-1)                                                                                                                                                
+        ys_lo =  pscin_1y_center-pscin_1y_spacing*(pad_1y_hi_num-1)
      >      -pscin_1y_size/2.
         hit_s1y = 0
+        if (xs.le.(hscin_1y_bot+hscin_1x_offset) .and. ! was .or.!was xs.le                                                                                                                                                                                                   
+     >      xs.ge.(hscin_1y_top+hscin_1x_offset) .and. ! was then                                                                                                                                                                                                             
+     >      ys .le. (ys_hi+0) .and. ys .ge. (ys_lo-0)) then                                                                                                                                                                                              
+               hit_s1y=1
+               endif
 
-        if (xs.le.(hscin_1y_bot+hscin_1x_offset) .and. ! was .or.!was xs.le                                                                                                                                                                                                    
-     >      xs.ge.(hscin_1y_top+hscin_1x_offset) .and.
- 	    ys .le. (ys_hi+0) .and. ys .ge. (ys_lo-0)) then
-           	hit_s1y=1
-		endif
 
      
 c if (xs.gt.(hscin_1y_bot+hscin_1x_offset) .or.
