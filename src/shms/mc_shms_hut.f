@@ -1,7 +1,8 @@
       subroutine mc_shms_hut (m2,p,x_fp,dx_fp,y_fp,dy_fp,ms_flag,
      > wcs_flag,
      > decay_flag,dflag,resmult,spec,ok_hut,zinit,pathlen,
-     > spectr)
+     > spectr,xs_pad1x_x,xs_pad1x_y,ys_pad1y_x,ys_pad1y_y,
+     > xs_pad2x_x,xs_pad2x_y,ys_pad2y_x,ys_pad2y_y)
 C----------------------------------------------------------------------
 C
 C Monte-Carlo of HMS detector hut.
