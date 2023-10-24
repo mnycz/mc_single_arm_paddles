@@ -439,7 +439,7 @@ C Strip off header
       write(*,*),str_line(1:last_char(str_line))
       iss = rd_real(str_line,tar_atom_num)
 
-! Paddles turned on for scintillators                                                                                                                                                                                                                                         \
+! Paddles turned                                                                                                                                                                                                                                      \
                                                                                                                                                                                                                                                                                
       read (chanin,1001) str_line
       write(*,*),str_line(1:last_char(str_line))
