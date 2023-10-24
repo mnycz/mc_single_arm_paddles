@@ -439,6 +439,55 @@ C Strip off header
       write(*,*),str_line(1:last_char(str_line))
       iss = rd_real(str_line,tar_atom_num)
 
+! Paddles turned on for scintillators                                                                                                                                                                                                                                         \
+                                                                                                                                                                                                                                                                               
+      read (chanin,1001) str_line
+      write(*,*),str_line(1:last_char(str_line))
+      iss = rd_int(str_line,pad_1x_lo_num)
+!      write(6,*) pad_1x_lo_num                                                                                                                                                                                                                                               
+      if (.not.iss) stop 'ERROR (1X low Paddle not set) in setup!'
+
+      read (chanin,1001) str_line
+      write(*,*),str_line(1:last_char(str_line))
+      iss = rd_int(str_line,pad_1x_hi_num)
+!      write(6,*) pad_1x_hi_num                                                                                                                                                                                                                                               
+      if (.not.iss) stop 'ERROR (1X high Paddle not set) in setup!'
+
+      read (chanin,1001) str_line
+      write(*,*),str_line(1:last_char(str_line))
+      iss = rd_int(str_line,pad_2x_lo_num)
+!      write(6,*) pad_2x_lo_num                                                                                                                                                                                                                                               
+      if (.not.iss) stop 'ERROR (2X low Paddle not set) in setup!'
+
+      read (chanin,1001) str_line
+      write(*,*),str_line(1:last_char(str_line))
+      iss = rd_int(str_line,pad_2x_hi_num)
+!      write(6,*) pad_2x_hi_num                                                                                                                                                                                                                                               
+      if (.not.iss) stop 'ERROR (2X high Paddle not set) in setup!'
+
+      read (chanin,1001) str_line
+      write(*,*),str_line(1:last_char(str_line))
+      iss = rd_int(str_line,pad_1y_lo_num)
+!      write(6,*) pad_1y_lo_num                                                                                                                                                                                                                                               
+      if (.not.iss) stop 'ERROR (1Y low Paddle not set) in setup!'
+
+      read (chanin,1001) str_line
+      write(*,*),str_line(1:last_char(str_line))
+      iss = rd_int(str_line,pad_1y_hi_num)
+!      write(6,*) pad_1y_hi_num                                                                                                                                                                                                                                                
+        if (.not.iss) stop 'ERROR (1Y high Paddle not set) in setup!'
+
+      read (chanin,1001) str_line
+      write(*,*),str_line(1:last_char(str_line))
+      iss = rd_int(str_line,pad_2y_lo_num)
+!       write(6,*) pad_2y_lo_num                                                                                                                                                                                                                                               
+        if (.not.iss) stop 'ERROR (2Y low Paddle not set) in setup!'
+
+      read (chanin,1001) str_line
+      write(*,*),str_line(1:last_char(str_line))
+      iss = rd_int(str_line,pad_2y_hi_num)
+!      write(6,*) pad_2y_hi_num                                                                                                                                                                                                                                                
+      if (.not.iss) stop 'ERROR (2Y high Paddle not set) in setup!'
 
  1000	continue
 
